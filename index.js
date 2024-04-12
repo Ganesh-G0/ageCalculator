@@ -1,64 +1,76 @@
-
-$("#btn").click(() => {      
-    var d = new Date();
-    var months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];         
-    var aid;
-    var aim;
-    var aiy;
-
-    const inputDate = $('#date').val();
-    const inputMonth = $('#month').val();
-    const inputYear = $('#year').val();
-    age(inputDate, inputMonth, inputYear);
-    $(".monthsOld").text(aim);
-    $(".daysOld").text(aid);
-    $(".yearsOld").text(aiy);
-
-function age(id, im, iy){    
-    let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    const cd = d.getDate(); const cm = d.getMonth() + 1; const cy = d.getFullYear(); 
-    if (cm == im) {0
-        if (months[im -1] == 28) {
-            aiy = (cy - iy); aim = (cm - im); aid = (31 - id + cd);  
-        }
-        else if (cd >= id ) { 
-            aiy = (cy - iy); aim = (cm - im); aid = (cd - id);  
-        }
-        else if (cd < id ) { 
-            aiy = (cy - iy -1); aim = (cm -1); aid = (months[im - 1] - id + cd -1);  
-        }
+$("#btn").click(() => {
+  let inputDay = $("#date").val();
+  let inputMonth = $("#month").val();
+  let inputYear = $("#year").val();
+  let y;
+  let m;
+  let d;
+  const day = new Date();
+  let currentDay = day.getDate();
+  let currentMonth = day.getMonth() + 1;
+  let currentYear = day.getFullYear();
+  
+  if (inputDay != '' && inputMonth != '' && inputYear != '') {
+    if (inputYear <= currentYear) {
+      age(inputYear, inputMonth, inputDay);
     }
-    else if (cm > im) {    
-        if (cd >= id ) { 
-            aiy = (cy - iy); aim = (cm - im); aid = (cd - id);
-        }
-        else if (cd < id ) { 
-            aiy = (cy - iy); aim = (cm - im -1); 
-            if (months[cm -1] && months[im -1] == 31) {
-                aid = (months[im - 1] - id + cd -1);  
-            }
-            else if (months[im -1] == 28) {
-                aid = (months[im - 1] - id + cd + 1);  
-            }
-            else {
-                aid = (months[im - 1] - id + cd);  
-            }
-        }
+    else {
+      alert("Year Must be Smaller than Current Year")
     }
-    else if (cm < im) {
-        if (cd >= id ) { 
-            aiy = (cy - iy -1); aim = (12 + cm - im); aid = (cd - id);
-        }
-        else if (cd < id ) { 
-            aiy = (cy - iy -1); aim = (12 + cm - im -1); 
-            if (months[cm -1] && months[im -1] == 31) {
-                aid = (months[im - 1] - id + cd -1);  
-            }
-            else {
-                aid = (months[im - 1] - id + cd);  
-            }
-        }
-    }
-}
-        
+  } else {
+    alert("Please fill the required fields")
+  }
+
+  $(".yearsOld").text(y);
+  $(".monthsOld").text(m);
+  $(".daysOld").text(d);
+
+  function age(year, month, day) {
+    console.log(inputDay, inputMonth, inputYear);
+    console.log(currentDay, currentMonth, currentYear);
+    if (currentMonth == inputMonth) {
+      if (currentDay == inputDay) {
+        console.log("cm=im: Year => ", y = currentYear - inputYear);
+        console.log("cd=id: Month => ", m = currentMonth - inputMonth);
+        console.log("cd=id: Day => ", d = currentDay - inputDay);
+      } else if (currentDay > inputDay) {
+        console.log("cm=im: Year => ", y = currentYear - inputYear);
+        console.log("cd > id: Month => ", m = currentMonth - inputMonth);
+        console.log("cd > id: Day => ", d =currentDay - inputDay);
+      } else {
+        console.log("cm=im: Year => ", y =  currentYear - inputYear - 1);
+        console.log("cd<id: Month => ",  m = 12 - 1);
+        console.log("cd<id: Day => ", d = 31 - inputDay + currentDay);
+      }
+    } else if (currentMonth > inputMonth) {
+      if (currentDay == inputDay) {
+        console.log("cm>im: Year => ", y = currentYear - inputYear);
+        console.log("cd=id: Month => ", m = currentMonth - inputMonth);
+        console.log("cd=id: Day => ", d = currentDay - inputDay);
+      } else if (currentDay > inputDay) {
+        console.log("cm>im: Year => ", y = currentYear - inputYear);
+        console.log("cd > id: Month => ", m = currentMonth - inputMonth);
+        console.log("cd > id: Day => ", d = currentDay - inputDay);
+      } else {
+        console.log("cm>im: Year => ", y = currentYear - inputYear);
+        console.log("cd<id: Month => ", m = currentMonth - inputMonth - 1);
+        console.log("cd<id: Day => ", d = 31 - inputDay + currentDay);
+      }
+    }else {
+      if (currentDay == inputDay) {
+        console.log("cm<im: Year => ", y =currentYear - inputYear - 1);
+        console.log("cd=id: Month => ", m = inputMonth - currentMonth);
+        console.log("cd=id: Day => ", d = currentDay - inputDay);
+      } else if (currentDay > inputDay) {
+        console.log("cm<im: Year => ", y = currentYear - inputYear - 1);
+        console.log("cd > id: Month => ",m = 12 -  inputMonth + currentMonth);
+        console.log("cd > id: Day => ", d = currentDay - inputDay);
+      } else {
+        console.log("cm<im: Year => ", y = currentYear - inputYear - 1);
+        console.log("cd<id: Month => ", m = 12 + currentMonth - inputMonth - 1);
+        console.log("cd<id: Day => ", d = 31 - inputDay + currentDay);
+      }
+    } 
+  }
+  
 });
