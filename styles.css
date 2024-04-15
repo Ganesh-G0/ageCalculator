@@ -19,60 +19,108 @@
 :is(input):focus:not(:focus-visible) {
     outline: none;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 html {
-    box-sizing: border-box;
+  font-size: 62.5%;
 }
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--OffWhite);
+  display: flex;
+  min-height: 100dvh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--OffWhite);
 }
 main {
-    max-width: 320px;
-    border-radius: 1rem 1rem 5rem 1rem;
-    background-color: var(--White);
+  gap: 4rem;
+  max-width: 45rem;
+  width: 90%;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--White);
+  border-radius: 2rem 2rem 10rem 2rem;
 }
-.bg {
-    padding: 1rem;
-    border-radius: 50%;
-    background-color: var(--Purple);
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
-div h1 {
-    font-weight: 800;
-    font-style: italic;
-    color: var(--OffBlack);
-    font-family: 'Poppins', sans-serif;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.purple {
-    color: var(--Purple);
+.form-group > label {
+  color: var(--SmokeyGrey);
+  text-transform: uppercase;
+  letter-spacing: .2rem;
+  font-size: 1.4rem;  
+  font-weight: 900;
 }
-.form-group label {
-    color: var(--SmokeyGrey);
-    text-transform: uppercase;
-    letter-spacing: .1rem;
+.form-group > input[type=number] {
+  padding: 1rem;
+  font-size: 1.8rem;
+  border-radius: .8rem;  
+  border: 1px solid var(--LightGrey);
 }
-.form-group input[type=number] {
-    border: 1px solid var(--LightGrey);
-    border-radius: 5px;
-    padding: 5px;
+.form-group > input[type=number]:invalid { color: red; }
+.form-group input[type=number]:focus-visible { cursor: pointer; }
+/* --------------------------------------------Button Element */
+.btn-div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 3rem 0;
+  position: relative;
 }
-input[type=number]:invalid {
-    color: red;
+.line-through {
+  width: 100%;
+  height: 2px ;
+  background-color: var(--LightGrey);
 }
-.form-group input[type=number]:focus-visible {
-    cursor: pointer;
+#btn {
+  border: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;  
+  padding: 2rem 2.5rem;
+  background-color: var(--Purple);
 }
-#btn:hover {
-    cursor: pointer;
-    filter:grayscale(100%) brightness(70%);
-
+#btn > img { max-width: 80%; width: 100%; }
+#btn:hover { filter:grayscale(100%) brightness(70%); }
+/* --------------------------------------------------Result */
+.result {
+  font-size: 4rem;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--OffBlack);
 }
-.attribution { font-size: 11px; text-align: center; }
-.attribution a { color: hsl(228, 45%, 44%); }
-
-@media (min-width:768px) {
-    main {
-        width: 520px;
-        max-width: 620px;
-    }
-    
+.result > p > span { color: var(--Purple); }
+@media (min-width: 50rem) {
+  main {
+    max-width: 70rem;
+  }
+  #btn {
+    right: 0;
+  }
+  form {
+    justify-content: start;
+    gap: 2rem;
+  }
+  .form-group > input[type=number] {
+    font-size: 2.8rem;
+    /* max-width: 12rem; */
+  }
+  .result {
+    font-size: 8rem;
+  }
 }
