@@ -6,15 +6,25 @@ $("#btn").click(() => {
   const currentMonth = d.getMonth() + 1;
   const currentDate = d.getDate();
   
-  let inputYear = parseInt($("#year").val());let inputMonth = parseInt($("#month").val());let inputDate = parseInt($("#date").val());
+  const inputYear = parseInt($("#year").val());
+  const inputMonth = parseInt($("#month").val());
+  const inputDate = parseInt($("#date").val());
   
-  const months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];  
+  
+  if (leapYearOrNot(inputYear) || leapYearOrNot(currentYear) ) {
+    months = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];    
+  } else {
+    months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];  
+  }
+
   const totalDays = months[inputMonth - 1] - inputDate + currentDate;
-/*
-console.log('Total Days: ', totalDays); calculateYears(); calculateMonthsDays();
-console.log(inputYear, inputMonth, inputDate);
-console.log(currentYear, currentMonth, currentDate);
-console.log(ageInYears, ageInMonths, ageInDays);
+  /*
+  console.log( months[inputMonth -1], inputDate, currentDate);
+  console.log('Total Days: ', totalDays); calculateYears(); calculateMonthsDays();
+  console.log(inputYear, inputMonth, inputDate);
+  console.log(currentYear, currentMonth, currentDate);
+  console.log(ageInYears, ageInMonths, ageInDays);
 */ 
 
   calculateYears(); 
@@ -44,10 +54,13 @@ console.log(ageInYears, ageInMonths, ageInDays);
     else if (currentMonth > inputMonth && currentDate < inputDate) {
       ageInMonths =  currentMonth - inputMonth - 1; ageInDays = totalDays;       
     }
-  }
-  
+  }  
   function calculateYears() {
-    if (currentMonth >= inputMonth) { ageInYears = currentYear - inputYear; } 
+    if (currentMonth >= inputMonth && currentDate >= inputDate) { ageInYears = currentYear - inputYear; } 
     else { ageInYears = currentYear - inputYear - 1; } 
+  }  
+  function leapYearOrNot(year) { 
+    if (year % 4 == 0) { return true; }   
+    else { return false; }
   }
 });
