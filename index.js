@@ -56,7 +56,7 @@ $("#btn").click(() => {
     }
   }  
   function calculateYears() {
-    if (currentMonth >= inputMonth && currentDate >= inputDate) { ageInYears = currentYear - inputYear; } 
+    if (currentMonth >= inputMonth) { ageInYears = currentYear - inputYear; } 
     else { ageInYears = currentYear - inputYear - 1; } 
   }  
   function leapYearOrNot(year) { 
