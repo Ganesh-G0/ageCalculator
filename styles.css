@@ -89,10 +89,10 @@ form {
 }
 #btn {
   border: 0;
+  padding: 2rem;
   cursor: pointer;
-  border-radius: 50%;
   position: absolute;  
-  padding: 2.5rem 2rem;
+  border-radius: 50%;
   background-color: var(--Purple);
 }
 #btn img { max-width: 80%; }
