@@ -1,5 +1,7 @@
 $("#btn").click(() => {
-  let ageInYears; let ageInMonths; let ageInDays; 
+  let ageInYears; 
+  let ageInMonths; 
+  let ageInDays; 
   
   const d = new Date();
   const currentYear = d.getFullYear();
@@ -10,15 +12,9 @@ $("#btn").click(() => {
   const inputMonth = parseInt($("#month").val());
   const inputDate = parseInt($("#date").val());
   
-  let months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];  
-  
-  if (leapYearOrNot(inputYear) || leapYearOrNot(currentYear) ) {
-    months = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];    
-  } else {
-    months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];  
-  }
-
+  let months = [31, 30, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];   
   const totalDays = months[inputMonth - 1] - inputDate + currentDate;
+  console.log(months[inputMonth - 1], inputDate, currentDate)
   /*
   console.log( months[inputMonth -1], inputDate, currentDate);
   console.log('Total Days: ', totalDays); calculateYears(); calculateMonthsDays();
@@ -36,31 +32,37 @@ $("#btn").click(() => {
   } else { alert("Fill the Required Fields"); }
   
   function calculateMonthsDays () {
-    if (currentMonth == inputMonth && currentDate >= inputDate) {
-      ageInMonths =  currentMonth - inputMonth ; ageInDays = currentDate - inputDate;       
+    if (currentMonth == inputMonth ) {
+      if (currentDate >= inputDate) {
+        ageInMonths =  currentMonth - inputMonth ; ageInDays = currentDate - inputDate;       
+      }
+      else if (currentDate < inputDate) {
+        ageInMonths =  12 - 1 ; ageInDays = totalDays - 1;       
+      }
     }
-    else if (currentMonth == inputMonth && currentDate < inputDate) {
-      ageInMonths =  12 - 1 ; ageInDays = totalDays + 1;       
+    else if (currentMonth < inputMonth) {
+      if (currentDate >= inputDate) {
+        ageInMonths = 12 - inputMonth + currentMonth ; ageInDays = currentDate - inputDate;       
+      }
+      else if (currentDate < inputDate) {
+        ageInMonths =  12 - inputMonth + currentMonth - 1 ; ageInDays = totalDays;       
+      }
     }
-    else if (currentMonth < inputMonth && currentDate >= inputDate) {
-      ageInMonths = 12 - inputMonth + currentMonth ; ageInDays = currentDate - inputDate;       
-    }
-    else if (currentMonth < inputMonth && currentDate < inputDate) {
-      ageInMonths =  12 - inputMonth + currentMonth - 1 ; ageInDays = totalDays + 1;       
-    }
-    else if (currentMonth > inputMonth && currentDate >= inputDate) {
-      ageInMonths =  currentMonth - inputMonth; ageInDays = currentDate - inputDate;       
-    }
-    else if (currentMonth > inputMonth && currentDate < inputDate) {
-      ageInMonths =  currentMonth - inputMonth - 1; ageInDays = totalDays;       
-    }
-  }  
+    else if (currentMonth > inputMonth) {
+      if (currentDate >= inputDate) {
+        ageInMonths =  currentMonth - inputMonth; ageInDays = currentDate - inputDate;       
+      }
+      else if (currentDate < inputDate) {
+        ageInMonths =  currentMonth - inputMonth - 1; ageInDays = totalDays;        
+      }
+    }  
+  } 
   function calculateYears() {
-    if (currentMonth >= inputMonth) { ageInYears = currentYear - inputYear; } 
-    else { ageInYears = currentYear - inputYear - 1; } 
+    if (currentMonth > inputMonth) { ageInYears = currentYear - inputYear; }
+    else if (currentMonth == inputMonth) { 
+      if (currentDate >= inputDate) { ageInYears = currentYear - inputYear; }
+      else { ageInYears = currentYear - inputYear - 1; }
+    } 
+    else { ageInYears = currentYear - inputYear - 1; }
   }  
-  function leapYearOrNot(year) { 
-    if (year % 4 == 0) { return true; }   
-    else { return false; }
-  }
 });
