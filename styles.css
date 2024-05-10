@@ -36,43 +36,60 @@ body {
   justify-content: center;
   background-color: var(--OffWhite);
 }
+/* ----------------------------------------------------------------------------form */
 main {
-  gap: 4rem;
-  max-width: 45rem;
   width: 90%;
-  padding: 4rem;
   display: flex;
+  max-width: 45rem;
+  padding: 1rem;
+  gap: 1rem;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   background-color: var(--White);
   border-radius: 2rem 2rem 10rem 2rem;
 }
 form {
+  gap: 1rem;
+  /* margin: 1rem; */
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
 }
 .form-group {
   display: flex;
   flex-direction: column;
-
 }
-.form-group > label {
+.form-group label {
   color: var(--SmokeyGrey);
   text-transform: uppercase;
   letter-spacing: .2rem;
   font-size: 1.4rem;  
   font-weight: 900;
 }
-.form-group > input[type=number] {
+.form-group input[type=number] {
   padding: 1rem;
   font-size: 1.8rem;
   border-radius: .8rem;  
   border: 1px solid var(--LightGrey);
 }
-.form-group > input[type=number]:invalid { color: red; }
+.form-group input[type=number]:invalid { color: red; }
 .form-group input[type=number]:focus-visible { cursor: pointer; }
+
+/* 
+.form-group p { 
+  color: red; 
+  text-transform: capitalize; 
+}
+.d-none {
+  opacity: 0;  
+}
+.d-block {
+  opacity: 1;
+}
+.form-group input[type=number].error { 
+  border: 1px solid red;
+}
+*/
 /* --------------------------------------------Button Element */
 .btn-div {
   display: flex;
@@ -80,7 +97,9 @@ form {
   flex-direction: column;
   justify-content: center;
   position: relative;
-  margin: 3rem 0;
+  margin: 5rem 0 0;
+  width: 80%;
+  align-self: center;
 }
 .line-through {
   width: 100%;
@@ -88,24 +107,35 @@ form {
   background-color: var(--LightGrey);
 }
 #btn {
-  border: 0;
   padding: 2rem;
   cursor: pointer;
   position: absolute;  
   border-radius: 50%;
   background-color: var(--Purple);
+  border: 0;
 }
 #btn img { max-width: 80%; }
-#btn:hover { filter:grayscale(100%) brightness(70%); }
+@media (hover: hover) {
+  #btn:hover { filter:grayscale(100%) brightness(70%);
+}
+#btn:active {
+  border: 0;
+}
+}
+@media (hover: none) {
+  #btn:active { filter:grayscale(100%) brightness(70%); }
+}
 /* --------------------------------------------------Result */
 .result {
+  padding: 2rem 2rem;
   font-size: 4rem;
   font-weight: 800;
   font-style: italic;
   color: var(--OffBlack);
 }
 .result > p > span { color: var(--Purple); }
-@media (max-width: 350px) {
+
+@media (max-width: 370px) {
   form {
     flex-direction: column;
   }
@@ -116,12 +146,18 @@ form {
     font-size: 3rem;
   }
 }
-@media (min-width: 50rem) {
+@media (min-width: 768px) {
   main {
     max-width: 65rem;
+    width: 100%;
+    padding: 4rem;
   }
   #btn {
     right: 0;
+  }
+  .btn-div {
+    width: 100%;
+    /* align-self: start; */
   }
   form {
     justify-content: start;
