@@ -1,3 +1,5 @@
+$(document).ready(() => {
+
 $("#btn").click(() => {
   let ageInYears; 
   let ageInMonths; 
@@ -22,38 +24,60 @@ $("#btn").click(() => {
   console.log(currentYear, currentMonth, currentDate);
   console.log(ageInYears, ageInMonths, ageInDays);
 */ 
-
   calculateYears(); 
   calculateMonthsDays();
-  if (inputDate >= 0 && inputYear >= 0 && inputMonth >= 0) {
+  if (
+    inputDate >= 0 && inputYear >= 0 && inputMonth >= 0) {    
     $('.yearsOld').text(ageInYears);
     $(".monthsOld").text(ageInMonths);
     $(".daysOld").text(ageInDays);  
-  } else { alert("Fill the Required Fields"); }
+  } else { alert("Fill the Required Fields"); }; 
+
   
   function calculateMonthsDays () {
     if (currentMonth == inputMonth ) {
       if (currentDate >= inputDate) {
-        ageInMonths =  currentMonth - inputMonth ; ageInDays = currentDate - inputDate;       
+        ageInMonths =  currentMonth - inputMonth ; 
+        ageInDays = currentDate - inputDate;       
       }
       else if (currentDate < inputDate) {
-        ageInMonths =  12 - 1 ; ageInDays = totalDays - 1;       
+        ageInMonths =  12 - 1 ; 
+        if (months[currentMonth] == 31 || months[inputMonth - 1] == 31) {
+          ageInDays = totalDays - 1;       
+        }
+        else {
+          ageInDays = totalDays;
+        }
       }
     }
     else if (currentMonth < inputMonth) {
       if (currentDate >= inputDate) {
-        ageInMonths = 12 - inputMonth + currentMonth ; ageInDays = currentDate - inputDate;       
+        ageInMonths = 12 - inputMonth + currentMonth ; 
+        ageInDays = currentDate - inputDate;       
       }
       else if (currentDate < inputDate) {
-        ageInMonths =  12 - inputMonth + currentMonth - 1 ; ageInDays = totalDays;       
+        ageInMonths =  12 - inputMonth + currentMonth - 1 ; 
+        if (months[currentMonth] == 31 || months[inputMonth - 1] == 31) {
+          ageInDays = totalDays - 1;       
+        }
+        else {
+          ageInDays = totalDays;
+        }
       }
     }
     else if (currentMonth > inputMonth) {
       if (currentDate >= inputDate) {
-        ageInMonths =  currentMonth - inputMonth; ageInDays = currentDate - inputDate;       
+        ageInMonths =  currentMonth - inputMonth; 
+        ageInDays = currentDate - inputDate;       
       }
       else if (currentDate < inputDate) {
-        ageInMonths =  currentMonth - inputMonth - 1; ageInDays = totalDays;        
+        ageInMonths =  currentMonth - inputMonth - 1; 
+        if (months[currentMonth] == 31 || months[inputMonth - 1] == 31) {
+          ageInDays = totalDays - 1;       
+        }
+        else {
+          ageInDays = totalDays;
+        }
       }
     }  
   } 
@@ -65,4 +89,7 @@ $("#btn").click(() => {
     } 
     else { ageInYears = currentYear - inputYear - 1; }
   }  
+});
+  
+console.log();
 });
